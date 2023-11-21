@@ -1,0 +1,24 @@
+
+
+.navbar-nav .nav-link {
+    position: relative;
+    font-family: 'cursive'; 
+    font-weight: bold; 
+    font-size: 1.2em; 
+  }
+  
+  .navbar-nav .nav-link:before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #3c096c;
+    transition: width 0.2s ease;
+  }
+  
+  .navbar-nav .nav-link:hover:before {
+    width: 100%;
+  }
+  
