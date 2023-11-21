@@ -1,19 +1,22 @@
 import React from "react";
 import { Navbar, Nav, Container } from "react-bootstrap";
-import { Link } from "react-router-dom"; 
-import logo from '../../assets/images/blog_logo.png';
-import './header.css';
+import { Link } from "react-router-dom";
+import logo from "../../assets/images/blog_logo.png";
+import "./header.css";
 
 const Header = () => {
   return (
-    <Navbar bg="light" expand="lg">
+    // <Navbar bg="light" expand="lg" className=" fixed-top ">
+    <Navbar bg="light" expand="lg" >
       <Container>
         <Navbar.Brand as={Link} to="/">
           <img src={logo} alt="logo" className="w-25 h-25" />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbar-nav" />
         <Navbar.Collapse id="navbar-nav">
-          <Nav className="ms-auto"> {/* Use ms-auto to align items to the right */}
+          <Nav className="ms-auto">
+            {" "}
+            {/* Use ms-auto to align items to the right */}
             <Nav.Link as={Link} to="/">
               Home
             </Nav.Link>
