@@ -2,6 +2,7 @@ import React from "react";
 import "./home.css";
 import { BASE_URL } from "../../utils/config.js";
 import useFetch from "../hooks/useFetch.js";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const {
@@ -50,7 +51,10 @@ const Home = () => {
                   </p>
                 </div>
                 <span className="d-flex justify-content-between">
-                  <button className="btn btn-primary">Read Full</button>
+                  <Link to={blogData._id}>
+                    
+                  <button className="btn btn-primary"  >Read Full</button>
+                  </Link>
                 </span>
               </div>
             </div>
