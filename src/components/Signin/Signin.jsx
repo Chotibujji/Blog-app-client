@@ -1,20 +1,66 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import "./sigin.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { BASE_URL } from "../../utils/config.js";
+import { AuthContext } from "../../context/AuthContext.js";
 
 const Signin = () => {
+  const [credentials, setCredentials] = useState({
+    email: undefined,
+    password: undefined,
+  });
+
+  const { dispatch } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    setCredentials((prev) => ({ ...prev, [e.target.id]: e.target.value }));
+  };
+
+  const handleClick = async (e) => {
+    e.preventDefault();
+    dispatch({ type: "LOGIN_START" });
+    try {
+      const res = await fetch(`${BASE_URL}/auth/login`, {
+        method: "POST",
+        headers: { "Content-type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify(credentials),
+      });
+      const result = await res.json();
+      if (!result.ok) alert(result.message);
+      // console.log(result);
+      dispatch({ type: "LOGIN_SUCCESS", payload: result.data });
+      // toast("Wow so easy!");
+      navigate("/");
+    } catch (e) {
+      dispatch({ type: "LOGIN_FAILURE", payload: e.message });
+      alert(e.message);
+    }
+  };
+
+
+
   return (
     <>
-      <div class="container">
-        <form class="form" action="">
-          <p class="title">Login Form</p>
-          <input placeholder="E-mail" class="username input" type="email" />
+      <div className="container">
+        <form className="form" onSubmit={handleClick}>
+          <p className="title">Login Form</p>
+          <input
+            placeholder="E-mail"
+            className="username input"
+            type="email"
+            id="email"
+            onChange={handleChange}
+          />
           <input
             placeholder="Password"
-            class="password input"
+            className="password input"
             type="password"
+            id="password"
+            onChange={handleChange}
           />
-          <button class="btn" type="submit">
+          <button className="btn" type="submit">
             Login
           </button>
           <p className="p_tag">
