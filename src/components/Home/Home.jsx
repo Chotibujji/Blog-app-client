@@ -11,7 +11,7 @@ const Home = () => {
     error,
   } = useFetch(`${BASE_URL}/blog/allBlogs`);
 
-  console.log("blogData :>> ", blogData);
+  // console.log("blogData :>> ", blogData);
 
   const truncateContent = (content, limit) => {
     const words = content.split(" ");

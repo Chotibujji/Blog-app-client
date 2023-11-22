@@ -7,20 +7,27 @@ const initial_state = {
       : null,
   loading: false,
   error: null,
+  role: localStorage.getItem('role') || null,
+  token: localStorage.getItem('token') || null,
 };
 
 export const AuthContext = createContext(initial_state);
 const AuthReducer = (state, action) => {
+  console.log(action.token)
+  console.log(action.payload)
   switch (action.type) {
     case "LOGIN_START":
       return {
         user: null,
+        token: null,
         loading: false,
         error: null,
       };
     case "LOGIN_SUCCESS":
       return {
         user: action.payload,
+        token: action.token,
+        role: action.role,
         loading: false,
         error: null,
       };
@@ -39,6 +46,8 @@ const AuthReducer = (state, action) => {
     case "LOGOUT":
       return {
         user: null,
+        role: null,
+        token: null,
         loading: false,
         error: null,
       };
@@ -52,7 +61,9 @@ export const AuthContextProvider = ({ children }) => {
 
   useEffect(() => {
     localStorage.setItem("user", JSON.stringify(state.user));
-  }, [state.user]);
+    localStorage.setItem('token', state.token);
+    localStorage.setItem('role', state.role);
+  }, [state]);
   return (
     <AuthContext.Provider
       value={{

@@ -1,13 +1,24 @@
-import React from "react";
-import { Navbar, Nav, Container } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import React, { useContext } from "react";
+import { Navbar, Nav, Container, Button } from "react-bootstrap";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/images/blog_logo.png";
 import "./header.css";
+import { AuthContext } from "../../context/AuthContext";
+import { BASE_URL } from "../../utils/config";
 
 const Header = () => {
+  const navigate = useNavigate();
+  const { user, dispatch } = useContext(AuthContext);
+  const logout = () => {
+    dispatch({ type: "LOGOUT" });
+    navigate("/");
+  };
+
+  
+
   return (
     // <Navbar bg="light" expand="lg" className=" fixed-top ">
-    <Navbar bg="light" expand="lg" >
+    <Navbar bg="light" expand="lg">
       <Container>
         <Navbar.Brand as={Link} to="/">
           <img src={logo} alt="logo" className="w-25 h-25" />
@@ -29,12 +40,21 @@ const Header = () => {
             <Nav.Link as={Link} to="/createNewBlog">
               Create blog
             </Nav.Link>
-            <Nav.Link as={Link} to="/register">
-              Register
-            </Nav.Link>
-            <Nav.Link as={Link} to="/signin">
-              Sign In
-            </Nav.Link>
+            {user ? (
+              <>
+              
+              <Nav.Link className="" onClick={logout}>
+                Logout
+              </Nav.Link>
+              <Link to={`/user/${user._id}`} >
+              <button className="blog__username" >{user.name}</button>
+              </Link>
+              </>
+            ) : (
+              <Nav.Link as={Link} to="/signin">
+                Sign In
+              </Nav.Link>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Container>

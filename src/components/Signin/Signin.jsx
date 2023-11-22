@@ -3,6 +3,7 @@ import "./sigin.css";
 import { Link, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../../utils/config.js";
 import { AuthContext } from "../../context/AuthContext.js";
+import { toast } from "react-toastify";
 
 const Signin = () => {
   const [credentials, setCredentials] = useState({
@@ -28,18 +29,21 @@ const Signin = () => {
         body: JSON.stringify(credentials),
       });
       const result = await res.json();
-      if (!result.ok) alert(result.message);
-      // console.log(result);
-      dispatch({ type: "LOGIN_SUCCESS", payload: result.data });
+      if (!result.ok) toast.success(result.message); 
+      // console.log(result.token);
+      dispatch({
+        type: "LOGIN_SUCCESS",
+        payload: result.data,
+        token: result.token,
+        role: result.role,
+      });
       // toast("Wow so easy!");
       navigate("/");
     } catch (e) {
       dispatch({ type: "LOGIN_FAILURE", payload: e.message });
-      alert(e.message);
+      toast.error(e.message);
     }
   };
-
-
 
   return (
     <>
