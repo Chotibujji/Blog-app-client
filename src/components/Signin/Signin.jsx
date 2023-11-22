@@ -29,7 +29,9 @@ const Signin = () => {
         body: JSON.stringify(credentials),
       });
       const result = await res.json();
-      if (!result.ok) toast.success(result.message); 
+      if (!result.ok) {
+        toast(result.message); 
+      }
       // console.log(result.token);
       dispatch({
         type: "LOGIN_SUCCESS",
@@ -38,6 +40,7 @@ const Signin = () => {
         role: result.role,
       });
       // toast("Wow so easy!");
+      toast(result.message); 
       navigate("/");
     } catch (e) {
       dispatch({ type: "LOGIN_FAILURE", payload: e.message });

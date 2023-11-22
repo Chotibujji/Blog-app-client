@@ -3,6 +3,7 @@ import "./register.css";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import { BASE_URL } from "../../utils/config";
+import { toast } from "react-toastify";
 
 const Register = () => {
   const [credentials, setCredentials] = useState({
@@ -30,15 +31,15 @@ const Register = () => {
       });
       const result = await res.json();
       if (!result.ok) {
-        alert(result.message);
+        toast(result.message);
         // console.log('result.message :>> ', result.message);
       }
 
       dispatch({ type: "REGISTER_SUCCESS" });
       navigate("/signin");
     } catch (e) {
-      // alert(e.message);
-      console.log('e :>> ', e);
+      toast(e.message);
+      // console.log('e :>> ', e);
     }
   };
 

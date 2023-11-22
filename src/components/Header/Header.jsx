@@ -5,12 +5,14 @@ import logo from "../../assets/images/blog_logo.png";
 import "./header.css";
 import { AuthContext } from "../../context/AuthContext";
 import { BASE_URL } from "../../utils/config";
+import { toast } from "react-toastify";
 
 const Header = () => {
   const navigate = useNavigate();
   const { user, dispatch } = useContext(AuthContext);
   const logout = () => {
     dispatch({ type: "LOGOUT" });
+    toast("Logout successfully");
     navigate("/");
   };
 
