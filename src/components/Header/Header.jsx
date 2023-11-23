@@ -13,6 +13,7 @@ const Header = () => {
   const logout = () => {
     dispatch({ type: "LOGOUT" });
     toast("Logout successfully");
+    window.location.reload();
     navigate("/");
   };
 
