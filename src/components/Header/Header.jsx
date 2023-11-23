@@ -17,8 +17,6 @@ const Header = () => {
     navigate("/");
   };
 
-  
-
   return (
     // <Navbar bg="light" expand="lg" className=" fixed-top ">
     <Navbar bg="light" expand="lg">
@@ -45,13 +43,12 @@ const Header = () => {
             </Nav.Link>
             {user ? (
               <>
-              
-              <Nav.Link className="" onClick={logout}>
-                Logout
-              </Nav.Link>
-              <Link to={`/user/${user._id}`} >
-              <button className="blog__username" >{user.name}</button>
-              </Link>
+                <Nav.Link className="" onClick={logout}>
+                  Logout
+                </Nav.Link>
+                <Link to={`/user/${user._id}`}>
+                  <button className="blog__username">{user.name}</button>
+                </Link>
               </>
             ) : (
               <Nav.Link as={Link} to="/signin">
