@@ -13,6 +13,8 @@ const Home = () => {
 
   // console.log("blogData :>> ", blogData);
 
+  // truncateContent function here take two arguments one is content i want to show and second arguments how many words to show
+
   const truncateContent = (content, limit) => {
     const words = content.split(" ");
     const truncated = words.slice(0, limit).join(" ");
@@ -21,7 +23,7 @@ const Home = () => {
 
   return (
     <>
-      <div class="container mt-2">
+      <div class="container ">
         <div class="row row-cols-1 row-cols-lg-3 row-cols-sm-1">
           {blogData?.map((blogData) => (
             <div class="col blog__parent ">
@@ -33,7 +35,7 @@ const Home = () => {
                 />
                 <p className="mt-1 author_name">Author: {blogData.user.name}</p>
                 <span className="d-flex justify-content-between">
-                  <h3 className="blog__title">{blogData.title}</h3>
+                  <h3 className="blog__title">{truncateContent(blogData.title, 2)}</h3>
                   <h5 className="d-flex align-items-center justify-content-center blog__topic">
                     Topic: {blogData.topic}
                   </h5>
