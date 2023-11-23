@@ -50,10 +50,10 @@ const EditUserInfo = () => {
       setLoading(false);
       console.log("message update user profile :>> ", message);
         toast.success(message);
-        toast.success("Please Login");
       logout()
+      navigate("/");
     } catch (e) {
-        toast.error(e.message);
+      //   toast.error(e.message);
       setLoading(false);
     }
   };
