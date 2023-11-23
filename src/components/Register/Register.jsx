@@ -28,7 +28,7 @@ const Register = () => {
         method: "POST",
         headers: { "Content-type": "application/json" },
         body: JSON.stringify(credentials),
-      });
+      }); 
       const result = await res.json();
       if (!result.ok) {
         toast(result.message);
